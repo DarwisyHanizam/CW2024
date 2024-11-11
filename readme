@@ -1,2 +1,22 @@
-11/11:  Added transitive to javafx.graphics
-        Added a readme file
+Todo:
+    Additional:
+    - 2 Dimensional movement
+    - Retry Button after game over
+    - Implement shield
+    - More levels / enemies
+    Gameplay Improvement:
+    - Adjust to consistent artstyle
+    - Add sound effects / music
+    Code Improvement:
+    - Consistent image name in code
+    - Add comments
+    - Split java code to more folders (enemy/level/user/etc.)
+    Debug:
+    - (temp) Switch to java 9
+    - Find replacement for observer method
+    - Error of changing levels?
+
+Changes:
+    Nov 11:
+    - Added transitive to javafx.graphics
+    - Added a readme file
