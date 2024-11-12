@@ -116,7 +116,8 @@ public abstract class LevelParent extends Observable {
 		background.setOnKeyReleased(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent e) {
 				KeyCode kc = e.getCode();
-				if (kc == KeyCode.UP || kc == KeyCode.DOWN || kc == KeyCode.LEFT || kc == KeyCode.RIGHT) user.stop();
+				if (kc == KeyCode.UP || kc == KeyCode.DOWN) user.stop("Vertical");
+				if (kc == KeyCode.LEFT || kc == KeyCode.RIGHT) user.stop("Horizontal");
 			}
 		});
 		root.getChildren().add(background);
