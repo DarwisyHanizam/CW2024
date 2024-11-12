@@ -1,6 +1,7 @@
 Todo:
     Additional:
-    - 2 Dimensional movement
+    - 2 Dimensional movement [COMPLETED]
+      - Fix user bullet position
     - Retry Button after game over
     - Implement shield
     - More levels / enemies
@@ -20,3 +21,6 @@ Changes:
     Nov 11:
     - Added transitive to javafx.graphics
     - Added a readme file
+    Nov 12:
+    - Modified readme to include todo list
+    - Added 2D user movement
