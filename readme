@@ -5,19 +5,20 @@ Todo:
       - Fix user bullet position [COMPLETED]
       - Fix movement to be less static [COMPLETE]
     - Retry Button after game over
-    - Implement shield
     - More levels / enemies
     Gameplay Improvement:
     - Adjust to consistent artstyle
     - Add sound effects / music
     Code Improvement:
-    - Consistent image name in codea
+    - Consistent image name in code
     - Add comments
     - Split java code to more folders (enemy/level/user/etc.)
     Debug:
-    - (temp) Switch to java 9
+    - Update java version [COMPLETE]
     - Find replacement for observer method
-    - Error of changing levels?
+      - Either make a new observer class or use action listener
+    - Error of changing levels
+    - Sheild functionality works, but image not shown [CURRENTLY WIP]
 
 Changes:
     Nov 11:
@@ -28,3 +29,5 @@ Changes:
     - Added 2D user movement
     Nov 13:
     - Fixed bugs from 2D movement
+    Nov 19:
+    - Update to Java-21
