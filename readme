@@ -13,6 +13,8 @@ Todo:
     - Consistent image name in code
     - Add comments
     - Split java code to more folders (enemy/level/user/etc.)
+    - Test case (game logic) = level requirement, user health, etc.
+    - Group same class implements/extends into a folder [CURRENT WIP]
     Debug:
     - Update java version [COMPLETE]
     - Find replacement for observer method
@@ -31,3 +33,5 @@ Changes:
     - Fixed bugs from 2D movement
     Nov 19:
     - Update to Java-21
+    Nov 25:
+    - Restructure class files into Actor folder

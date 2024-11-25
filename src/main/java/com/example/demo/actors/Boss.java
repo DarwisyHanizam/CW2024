@@ -1,8 +1,8 @@
-package com.example.demo;
+package com.example.demo.actors;
 
 import java.util.*;
 
-public class Boss extends FighterPlane {
+public class Boss extends FighterPlane{
 
 	private static final String IMAGE_NAME = "bossplane.png";
 	private static final double INITIAL_X_POSITION = 1000.0;
@@ -12,7 +12,7 @@ public class Boss extends FighterPlane {
 	private static final double BOSS_SHIELD_PROBABILITY = .002;
 	private static final int IMAGE_HEIGHT = 300;
 	private static final int VERTICAL_VELOCITY = 8;
-	private static final int HEALTH = 100;
+	private static final int HEALTH = 10;
 	private static final int MOVE_FREQUENCY_PER_CYCLE = 5;
 	private static final int ZERO = 0;
 	private static final int MAX_FRAMES_WITH_SAME_MOVE = 10;
@@ -31,7 +31,7 @@ public class Boss extends FighterPlane {
 		consecutiveMovesInSameDirection = 0;
 		indexOfCurrentMove = 0;
 		framesWithShieldActivated = 0;
-		isShielded = false;
+		isShielded = true;
 		initializeMovePattern();
 	}
 
@@ -58,9 +58,11 @@ public class Boss extends FighterPlane {
 	
 	@Override
 	public void takeDamage() {
+		System.out.print("HIT! ");
 		if (!isShielded) {
 			super.takeDamage();
-		}
+			System.out.println("They don't have a sheild");
+		} else { System.out.println("They have a sheild"); }
 	}
 
 	private void initializeMovePattern() {
