@@ -14,13 +14,16 @@ Todo:
     - Add comments
     - Split java code to more folders (enemy/level/user/etc.)
     - Test case (game logic) = level requirement, user health, etc.
-    - Group same class implements/extends into a folder [CURRENT WIP]
+    - Group same class implements/extends into a folder
+    - Remove Destructible.java (unnecessary abstract, only 1 class uses)
     Debug:
+    - Enemy + User plane hitboxes
+      - Modify the images, make it smaller
     - Update java version [COMPLETE]
-    - Find replacement for observer method
-      - Either make a new observer class or use action listener
-    - Error of changing levels
-    - Sheild functionality works, but image not shown [CURRENTLY WIP]
+    - Find replacement for observer method [COMPLETE]
+      - Either make a new observer class or use action listener [COMPLETE]
+    - Error of changing levels [CURRENTLY WIP]
+    - Sheild functionality works, but image not shown
 
 Changes:
     Nov 11:
@@ -35,3 +38,4 @@ Changes:
     - Update to Java-21
     Nov 25:
     - Restructure class files into Actor folder
+    - Replaced Observer type with ActionListener

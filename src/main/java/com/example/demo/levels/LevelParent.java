@@ -1,11 +1,15 @@
-package com.example.demo;
+package com.example.demo.levels;
 
-import java.util.*;
 import java.util.stream.Collectors;
 
 import com.example.demo.actors.ActiveActorDestructible;
 import com.example.demo.actors.FighterPlane;
 import com.example.demo.actors.UserPlane;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.animation.*;
 import javafx.event.EventHandler;
@@ -15,7 +19,9 @@ import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.util.Duration;
 
-public abstract class LevelParent extends Observable {
+public abstract class LevelParent {
+
+	private List<ActionListener> actionListeners = new ArrayList<>();
 
 	private static final double SCREEN_HEIGHT_ADJUSTMENT = 150;
 	private static final int MILLISECOND_DELAY = 50;
@@ -77,9 +83,19 @@ public abstract class LevelParent extends Observable {
 		timeline.play();
 	}
 
+	public void addActionListener(ActionListener listener) {
+		actionListeners.add(listener);
+	}
+
+	private void notifyActionListener(String levelName) {
+		ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, levelName);
+		for (ActionListener listener : actionListeners) {
+			listener.actionPerformed(event);
+		}
+	}
+
 	public void goToNextLevel(String levelName) {
-		setChanged();
-		notifyObservers(levelName);
+		notifyActionListener(levelName);
 	}
 
 	private void updateScene() {

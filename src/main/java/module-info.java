@@ -1,5 +1,6 @@
 module com.example.demo {
     requires transitive javafx.graphics;
+    requires transitive java.desktop;
     requires javafx.controls;
     requires javafx.fxml;
 

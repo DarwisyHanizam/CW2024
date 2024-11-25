@@ -1,4 +1,6 @@
-package com.example.demo;
+package com.example.demo.levels;
+
+import com.example.demo.ShieldImage;
 
 import javafx.scene.Group;
 
@@ -13,6 +15,7 @@ public class LevelViewLevelTwo extends LevelView {
 		super(root, heartsToDisplay);
 		this.root = root;
 		this.shieldImage = new ShieldImage(SHIELD_X_POSITION, SHIELD_Y_POSITION);
+		this.showShield();
 		addImagesToRoot();
 	}
 	
