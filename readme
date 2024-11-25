@@ -22,7 +22,7 @@ Todo:
     - Update java version [COMPLETE]
     - Find replacement for observer method [COMPLETE]
       - Either make a new observer class or use action listener [COMPLETE]
-    - Error of changing levels [CURRENTLY WIP]
+    - Error of changing levels [COMPLETE]
     - Sheild functionality works, but image not shown
 
 Changes:
@@ -39,3 +39,4 @@ Changes:
     Nov 25:
     - Restructure class files into Actor folder
     - Replaced Observer type with ActionListener
+    - Fixed bugs from transitioning level

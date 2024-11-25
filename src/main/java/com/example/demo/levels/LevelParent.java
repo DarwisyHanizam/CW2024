@@ -181,6 +181,17 @@ public abstract class LevelParent {
 		actors.removeAll(destroyedActors);
 	}
 
+	public void removeAllActors(){
+		friendlyUnits.clear();
+		enemyUnits.clear();
+		userProjectiles.clear();
+		enemyProjectiles.clear();
+
+		timeline.stop();
+
+		root.getChildren().clear();
+	}
+
 	private void handlePlaneCollisions() {
 		handleCollisions(friendlyUnits, enemyUnits);
 	}
