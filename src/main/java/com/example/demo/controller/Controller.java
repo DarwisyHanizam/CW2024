@@ -32,7 +32,9 @@ public class Controller implements ActionListener {
 	private void goToLevel(String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException,
 			InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 			
-			if (currentLevel != null) currentLevel.removeAllActors();
+			if (currentLevel != null) {
+				currentLevel.removeAllActors();
+			}
 			
 			Class<?> myClass = Class.forName(className);
 			Constructor<?> constructor = myClass.getConstructor(double.class, double.class);
@@ -54,6 +56,7 @@ public class Controller implements ActionListener {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText(e.getClass().toString());
 			alert.show();
+			e.printStackTrace();;
 		}
 	}
 

@@ -5,17 +5,18 @@ import javafx.scene.image.ImageView;
 
 public class ShieldImage extends ImageView {
 	
-	private static final String IMAGE_NAME = "/images/shield.png";
-	private static final int SHIELD_SIZE = 200;
+	private static final String IMAGE_NAME = "/com/example/demo/images/shield.png";
+	private static final int WIDTH = 600;
+	private static final int HEIGHT = 500;
 	
 	public ShieldImage(double xPosition, double yPosition) {
+		this.setImage(new Image(getClass().getResource(IMAGE_NAME).toExternalForm()));
 		this.setLayoutX(xPosition);
 		this.setLayoutY(yPosition);
 		//this.setImage(new Image(IMAGE_NAME));
-		this.setImage(new Image(getClass().getResource("/com/example/demo/images/shield.jpg").toExternalForm()));
-		this.setVisible(false);
-		this.setFitHeight(SHIELD_SIZE);
-		this.setFitWidth(SHIELD_SIZE);
+		//this.setVisible(false);
+		this.setFitWidth(WIDTH);
+		this.setFitHeight(HEIGHT);
 	}
 
 	public void showShield() {

@@ -1,6 +1,8 @@
-package com.example.demo.actors;
+package com.example.demo.actors;//
 
 import java.util.*;
+
+import com.example.demo.levels.LevelViewLevelTwo;
 
 public class Boss extends FighterPlane{
 
@@ -25,13 +27,18 @@ public class Boss extends FighterPlane{
 	private int indexOfCurrentMove;
 	private int framesWithShieldActivated;
 
-	public Boss() {
+	private LevelViewLevelTwo levelView;
+
+	public Boss(LevelViewLevelTwo levelView) {
 		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, HEALTH);
+		this.levelView = levelView;
 		movePattern = new ArrayList<>();
 		consecutiveMovesInSameDirection = 0;
 		indexOfCurrentMove = 0;
 		framesWithShieldActivated = 0;
-		isShielded = true;
+		System.out.println("then this, but error");
+		levelView.addShieldToRoot();
+		activateShield();
 		initializeMovePattern();
 	}
 
@@ -112,11 +119,13 @@ public class Boss extends FighterPlane{
 
 	private void activateShield() {
 		isShielded = true;
+		levelView.showShield();
 	}
 
 	private void deactivateShield() {
 		isShielded = false;
 		framesWithShieldActivated = 0;
+		levelView.hideShield();
 	}
 
 }

@@ -1,3 +1,7 @@
+
+SHIELD IS BEHIND THE BACKGROUND!!!!!! 
+
+
 Todo:
     Additional:
     - 2 Dimensional movement [COMPLETED]
@@ -23,7 +27,8 @@ Todo:
     - Find replacement for observer method [COMPLETE]
       - Either make a new observer class or use action listener [COMPLETE]
     - Error of changing levels [COMPLETE]
-    - Sheild functionality works, but image not shown
+    - Sheild functionality works, but image not shown [COMPLETED]
+      - Image is shown, but appears at the back. Lowered background opacity [COMPLETE] 
 
 Changes:
     Nov 11:
@@ -40,3 +45,5 @@ Changes:
     - Restructure class files into Actor folder
     - Replaced Observer type with ActionListener
     - Fixed bugs from transitioning level
+    Dec 2:
+    - Implemented shield functionality to boss

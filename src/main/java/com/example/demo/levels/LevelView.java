@@ -2,6 +2,7 @@ package com.example.demo.levels;
 
 import com.example.demo.GameOverImage;
 import com.example.demo.HeartDisplay;
+import com.example.demo.ShieldImage;
 import com.example.demo.WinImage;
 
 import javafx.scene.Group;
@@ -20,6 +21,7 @@ public class LevelView {
 	private final HeartDisplay heartDisplay;
 	
 	public LevelView(Group root, int heartsToDisplay) {
+		System.out.println("1st + 2nd");
 		this.root = root;
 		this.heartDisplay = new HeartDisplay(HEART_DISPLAY_X_POSITION, HEART_DISPLAY_Y_POSITION, heartsToDisplay);
 		this.winImage = new WinImage(WIN_IMAGE_X_POSITION, WIN_IMAGE_Y_POSITION);

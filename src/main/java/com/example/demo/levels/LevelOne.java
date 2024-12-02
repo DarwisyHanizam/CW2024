@@ -46,6 +46,7 @@ public class LevelOne extends LevelParent {
 
 	@Override
 	protected LevelView instantiateLevelView() {
+		System.out.println("when does this occur?");
 		return new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
 	}
 
