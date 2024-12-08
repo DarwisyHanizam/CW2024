@@ -1,8 +1,9 @@
 package com.example.demo.levels;//
 
 import com.example.demo.actors.Boss;
+import com.example.demo.levels.handler.LevelAbstract;
 
-public class LevelTwo extends LevelParent {
+public class LevelTwo extends LevelAbstract {
 
 	private static final String BACKGROUND_IMAGE_NAME = "/com/example/demo/images/background2.jpg";
 	private static final int PLAYER_INITIAL_HEALTH = 5;
@@ -11,6 +12,7 @@ public class LevelTwo extends LevelParent {
 
 	public LevelTwo(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
+		setLevelAbstract(this);
 		System.out.println("here first right?");
 		boss = new Boss(levelViewTwo);
 	}
@@ -23,10 +25,10 @@ public class LevelTwo extends LevelParent {
 	@Override
 	protected void checkIfGameOver() {
 		if (userIsDestroyed()) {
-			loseGame();
+			levelControl.loseGame();
 		}
 		else if (boss.isDestroyed()) {
-			winGame();
+			levelControl.winGame();
 		}
 	}
 

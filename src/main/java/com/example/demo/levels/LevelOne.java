@@ -2,8 +2,9 @@ package com.example.demo.levels;
 
 import com.example.demo.actors.ActiveActorDestructible;
 import com.example.demo.actors.EnemyPlane;
+import com.example.demo.levels.handler.LevelAbstract;
 
-public class LevelOne extends LevelParent {
+public class LevelOne extends LevelAbstract {
 	
 	private static final String BACKGROUND_IMAGE_NAME = "/com/example/demo/images/background1.jpg";
 	private static final String NEXT_LEVEL = "com.example.demo.levels.LevelTwo";
@@ -19,14 +20,15 @@ public class LevelOne extends LevelParent {
 	@Override
 	protected void checkIfGameOver() {
 		if (userIsDestroyed()) {
-			loseGame();
+			levelControl.loseGame();
 		}
 		else if (userHasReachedKillTarget() && getCurrentNumberOfEnemies() == 0)
-			goToNextLevel(NEXT_LEVEL);
+			levelControl.goToNextLevel(NEXT_LEVEL);
 	}
 
 	@Override
 	protected void initializeFriendlyUnits() {
+		System.out.println("Test here twoo");
 		getRoot().getChildren().add(getUser());
 	}
 

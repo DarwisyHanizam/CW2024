@@ -1,7 +1,3 @@
-
-SHIELD IS BEHIND THE BACKGROUND!!!!!! 
-
-
 Todo:
     Additional:
     - 2 Dimensional movement [COMPLETED]
@@ -47,3 +43,7 @@ Changes:
     - Fixed bugs from transitioning level
     Dec 2:
     - Implemented shield functionality to boss
+     (comment on difficulty of image layering)
+    Dec 8:
+    - Split LevelParent into multiple files based on functionality
+     (comment on difficulty of splitting files while maintaining functionality)

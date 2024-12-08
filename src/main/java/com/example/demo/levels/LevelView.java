@@ -2,7 +2,6 @@ package com.example.demo.levels;
 
 import com.example.demo.GameOverImage;
 import com.example.demo.HeartDisplay;
-import com.example.demo.ShieldImage;
 import com.example.demo.WinImage;
 
 import javafx.scene.Group;
