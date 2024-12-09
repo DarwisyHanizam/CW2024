@@ -1,8 +1,12 @@
-package com.example.demo.actors;//
+package com.example.demo.actors.enemy;
 
-import java.util.*;
-
+import com.example.demo.actors.ActiveActorDestructible;
+import com.example.demo.actors.FighterPlane;
 import com.example.demo.levels.LevelViewLevelTwo;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Boss extends FighterPlane{
 
@@ -21,12 +25,12 @@ public class Boss extends FighterPlane{
 	private static final int Y_POSITION_UPPER_BOUND = -100;
 	private static final int Y_POSITION_LOWER_BOUND = 475;
 	private static final int MAX_FRAMES_WITH_SHIELD = 500;
+
 	private final List<Integer> movePattern;
 	private boolean isShielded;
 	private int consecutiveMovesInSameDirection;
 	private int indexOfCurrentMove;
 	private int framesWithShieldActivated;
-
 	private LevelViewLevelTwo levelView;
 
 	public Boss(LevelViewLevelTwo levelView) {

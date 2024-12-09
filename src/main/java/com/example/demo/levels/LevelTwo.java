@@ -1,6 +1,6 @@
-package com.example.demo.levels;//
+package com.example.demo.levels;
 
-import com.example.demo.actors.Boss;
+import com.example.demo.actors.enemy.Boss;
 import com.example.demo.levels.handler.LevelAbstract;
 
 public class LevelTwo extends LevelAbstract {

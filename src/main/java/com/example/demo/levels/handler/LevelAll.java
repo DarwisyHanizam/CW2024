@@ -1,7 +1,7 @@
 package com.example.demo.levels.handler;
 
 import com.example.demo.actors.ActiveActorDestructible;
-import com.example.demo.actors.UserPlane;
+import com.example.demo.actors.friendly.UserPlane;
 import com.example.demo.levels.LevelView;
 
 import java.util.List;

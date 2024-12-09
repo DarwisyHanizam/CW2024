@@ -1,7 +1,10 @@
-package com.example.demo.actors;
+package com.example.demo.actors.enemy;
+
+import com.example.demo.actors.ActiveActorDestructible;
+import com.example.demo.actors.FighterPlane;
 
 //import javafx.scene.shape.Polygon;
-//
+
 public class EnemyPlane extends FighterPlane {
 
 	private static final String IMAGE_NAME = "enemyplane.png";

@@ -1,11 +1,11 @@
 package com.example.demo.levels;
 
 import com.example.demo.actors.ActiveActorDestructible;
-import com.example.demo.actors.EnemyPlane;
+import com.example.demo.actors.enemy.EnemyPlane;
 import com.example.demo.levels.handler.LevelAbstract;
 
 public class LevelOne extends LevelAbstract {
-	
+
 	private static final String BACKGROUND_IMAGE_NAME = "/com/example/demo/images/background1.jpg";
 	private static final String NEXT_LEVEL = "com.example.demo.levels.LevelTwo";
 	private static final int TOTAL_ENEMIES = 5;
