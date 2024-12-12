@@ -17,8 +17,8 @@ Todo:
     - Group same class implements/extends into a folder
     - Remove Destructible.java (unnecessary abstract, only 1 class uses)
     Debug:
-    - Enemy + User plane hitboxes
-      - Modify the images, make it smaller
+    - Enemy + User plane hitboxes [COMPLETE]
+      - Modify the images, make it smaller [COMPLETE]
     - Update java version [COMPLETE]
     - Find replacement for observer method [COMPLETE]
       - Either make a new observer class or use action listener [COMPLETE]
@@ -49,3 +49,5 @@ Changes:
      (comment on difficulty of splitting files while maintaining functionality)
     Dec 9:
     - Restructure actor class files and removed Destructible.java
+    Dec 12:
+    - Fixed user + enemy collision boundary

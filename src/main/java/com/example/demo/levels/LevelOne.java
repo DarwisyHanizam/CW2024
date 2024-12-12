@@ -1,7 +1,7 @@
 package com.example.demo.levels;
 
 import com.example.demo.actors.ActiveActorDestructible;
-import com.example.demo.actors.enemy.EnemyPlane;
+import com.example.demo.actors.enemy.EnemyPlaneOne;
 import com.example.demo.levels.handler.LevelAbstract;
 
 public class LevelOne extends LevelAbstract {
@@ -28,7 +28,6 @@ public class LevelOne extends LevelAbstract {
 
 	@Override
 	protected void initializeFriendlyUnits() {
-		System.out.println("Test here twoo");
 		getRoot().getChildren().add(getUser());
 	}
 
@@ -39,7 +38,7 @@ public class LevelOne extends LevelAbstract {
 			for (int i = 0; i < TOTAL_ENEMIES - currentNumberOfEnemies; i++) {
 				if (Math.random() < ENEMY_SPAWN_PROBABILITY) {
 					double newEnemyInitialYPosition = Math.random() * getEnemyMaximumYPosition();
-					ActiveActorDestructible newEnemy = new EnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
+					ActiveActorDestructible newEnemy = new EnemyPlaneOne(getScreenWidth(), newEnemyInitialYPosition);
 					addEnemyUnit(newEnemy);
 				}
 			}
@@ -48,7 +47,6 @@ public class LevelOne extends LevelAbstract {
 
 	@Override
 	protected LevelView instantiateLevelView() {
-		System.out.println("when does this occur?");
 		return new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
 	}
 
