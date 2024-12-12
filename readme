@@ -52,3 +52,4 @@ Changes:
     Dec 12:
     - Fixed user + enemy collision boundary
     - Added new level and enemy type
+    - Modified positioning of images when displayed
