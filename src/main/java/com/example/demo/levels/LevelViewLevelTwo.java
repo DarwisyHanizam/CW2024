@@ -11,10 +11,14 @@ public class LevelViewLevelTwo extends LevelView {
 	private final Group root;
 	private final ShieldImage shieldImage;
 
-	public LevelViewLevelTwo(Group root, int heartsToDisplay) {
+	public LevelViewLevelTwo(Group root, int heartsToDisplay, double yPositionOffset) {
 		super(root, heartsToDisplay);
 		this.root = root;
-		this.shieldImage = new ShieldImage(SHIELD_X_POSITION, SHIELD_Y_POSITION);
+		this.shieldImage = new ShieldImage(SHIELD_X_POSITION, SHIELD_Y_POSITION + yPositionOffset);
+	}
+
+	public LevelViewLevelTwo(Group root, int heartsToDisplay) {
+		this(root, heartsToDisplay, 0);
 	}
 
 	public void addShieldToRoot() {
