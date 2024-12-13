@@ -15,7 +15,7 @@ Todo:
     - Split java code to more folders (enemy/level/user/etc.)
     - Test case (game logic) = level requirement, user health, etc.
     - Group same class implements/extends into a folder
-    - Remove Destructible.java (unnecessary abstract, only 1 class uses)
+    - Remove Destructible.java (unnecessary abstract, only 1 class uses) [COMPLETE]
     Debug:
     - Enemy + User plane hitboxes [COMPLETE]
       - Modify the images, make it smaller [COMPLETE]
@@ -53,3 +53,6 @@ Changes:
     - Fixed user + enemy collision boundary
     - Added new level and enemy type
     - Modified positioning of images when displayed
+    Dec 13:
+    - Fixed user movement edge case
+     (comment on difficulty during overcomplication)
