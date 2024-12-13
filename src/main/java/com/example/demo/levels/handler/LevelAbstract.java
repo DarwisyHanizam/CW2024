@@ -6,7 +6,6 @@ public abstract class LevelAbstract extends LevelAll{
 
 	public LevelAbstract(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth){
 		super(backgroundImageName, screenHeight, screenWidth, playerInitialHealth);
-		initializeLevelAbstract(this);
 	}
 
 	protected abstract void checkIfGameOver();

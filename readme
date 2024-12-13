@@ -58,3 +58,4 @@ Changes:
      (comment on difficulty during overcomplication)
     - Added different user projectile types
     - Added new boss level (LevelFour)
+    - Split LevelInitializer's input functionality to UserInput

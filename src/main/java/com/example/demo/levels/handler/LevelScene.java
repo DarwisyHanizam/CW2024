@@ -9,9 +9,9 @@ public class LevelScene {
 	private LevelAll levelAll;
 	private LevelAbstract levelAbstract;
 
-	public LevelScene(LevelAll levelAll, LevelAbstract levelAbstract){
+	public LevelScene(LevelAll levelAll){
 		this.levelAll = levelAll;
-		this.levelAbstract = levelAbstract;
+		this.levelAbstract = (LevelAbstract) levelAll;
 	}
 
 	void updateScene() {

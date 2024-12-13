@@ -21,6 +21,7 @@ public class LevelAll {
 	protected LevelMechanics levelMechanics;
 	public LevelScene levelScene;
 	protected LevelAbstract levelAbstract;
+	protected UserInput userInput;
 
 	protected final List<ActionListener> actionListeners;
 	protected final List<ActiveActorDestructible> friendlyUnits;
@@ -44,11 +45,13 @@ public class LevelAll {
 	protected LevelView levelView;
 
 	public LevelAll(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth){
+		this.levelAbstract = (LevelAbstract) this;
 		this.levelCollision = new LevelCollision(this);
 		this.levelControl = new LevelControl(this);
-		//this.levelInitializer = new LevelInitializer(this);
+		this.levelInitializer = new LevelInitializer(this);
 		this.levelMechanics = new LevelMechanics(this);
-		//this.levelScene = new LevelScene(this);
+		this.levelScene = new LevelScene(this);
+		this.userInput = new UserInput(this);
 
 		this.root = new Group();
 		this.scene = new Scene(root, screenWidth, screenHeight);
@@ -67,25 +70,9 @@ public class LevelAll {
 		this.enemyMaximumYPosition = screenHeight - SCREEN_HEIGHT_ADJUSTMENT;
 		this.currentNumberOfEnemies = 0;
 
-		//this.levelView = instantiateLevelView();
-		//initializeTimeline();
-		//friendlyUnits.add(user);
-	}
-
-	protected void initializeLevelAbstract(LevelAbstract levelAbstract){
-		setLevelAbstract(levelAbstract);
-		System.out.println("LevelAll: " + this);
-		System.out.println("LevelAbstract: " + levelAbstract);
-		
-		this.levelInitializer = new LevelInitializer(this, levelAbstract);
-		this.levelScene = new LevelScene(this, levelAbstract);
 		this.levelView = levelAbstract.instantiateLevelView();
 		levelInitializer.initializeTimeline();
 		friendlyUnits.add(user);
-	}
-
-	protected void setLevelAbstract(LevelAbstract levelAbstract){
-		this.levelAbstract = levelAbstract;
 	}
 
 	protected UserPlane getUser() {
