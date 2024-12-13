@@ -5,7 +5,7 @@ Todo:
       - Fix user bullet position [COMPLETED]
       - Fix movement to be less static [COMPLETE]
     - Retry Button after game over
-    - More levels / enemies
+    - More levels / enemies [COMPLETE]
     Gameplay Improvement:
     - Adjust to consistent artstyle
     - Add sound effects / music
@@ -56,3 +56,4 @@ Changes:
     Dec 13:
     - Fixed user movement edge case
      (comment on difficulty during overcomplication)
+    - Added different user projectile types

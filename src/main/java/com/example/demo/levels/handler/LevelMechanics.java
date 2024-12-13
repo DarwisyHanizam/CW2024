@@ -11,7 +11,11 @@ public class LevelMechanics {
 	}
 
 	void fireProjectile() {
-		ActiveActorDestructible projectile = levelAll.user.fireProjectile();
+		fireProjectile(0);
+	}
+
+	void fireProjectile(double yPositionOffset) {
+		ActiveActorDestructible projectile = levelAll.user.fireProjectile(yPositionOffset);
 		levelAll.root.getChildren().add(projectile);
 		levelAll.userProjectiles.add(projectile);
 	}

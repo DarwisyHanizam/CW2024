@@ -2,9 +2,13 @@ package com.example.demo.levels.handler;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class LevelInitializer{
 
@@ -12,9 +16,10 @@ public class LevelInitializer{
 	private LevelAbstract levelAbstract;
 
 	private boolean movingLeft, movingRight, movingUp, movingDown;
-	private boolean firedShot;
+	private boolean singleShot = true, rapidShot = true, multiShot = true;
 	private long timeLeftPress, timeRightPress, timeUpPress, timeDownPress = 0;
 	private static long DELAY = 100;
+	private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
 	public LevelInitializer(LevelAll levelAll, LevelAbstract levelAbstract){
 		this.levelAll = levelAll;
@@ -85,8 +90,14 @@ public class LevelInitializer{
 					movingDown = false;
 					timeDownPress = System.currentTimeMillis() + DELAY;;
 					break;
-				case KeyCode.SPACE:
-					firedShot = false;
+				case KeyCode.Z:
+					multiShot = false;
+					break;
+				case KeyCode.X:
+					rapidShot = false;
+					break;
+				case KeyCode.C:
+					singleShot = false;
 					break;
 				default:
 					break;
@@ -126,9 +137,26 @@ public class LevelInitializer{
 			levelAll.user.stop("Vertical");
 		}
 
-		if (!firedShot) {
+		if (!singleShot) {
+			singleShot = true;
 			levelAll.levelMechanics.fireProjectile();
-			firedShot = true;
+		}
+		
+		if (!rapidShot) {
+			rapidShot = true;
+			for (int i = 0; i < 3; ++i) {
+				scheduler.schedule(() -> {
+					Platform.runLater(() -> {
+						levelAll.levelMechanics.fireProjectile();
+					});
+				}, i * 100, TimeUnit.MILLISECONDS);
+			}
+		}
+
+		if (!multiShot) {
+			multiShot = true;
+			levelAll.levelMechanics.fireProjectile(-10);
+			levelAll.levelMechanics.fireProjectile(10);
 		}
 	}
 }
