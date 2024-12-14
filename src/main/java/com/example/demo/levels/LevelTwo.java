@@ -9,11 +9,11 @@ public class LevelTwo extends LevelAbstract {
 	private static final String NEXT_LEVEL = "com.example.demo.levels.LevelThree";
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 	private final Boss boss;
-	private LevelViewLevelTwo levelViewTwo;
+	private LevelView levelView;
 
 	public LevelTwo(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
-		boss = new Boss(levelViewTwo);
+		boss = new Boss(levelView);
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public class LevelTwo extends LevelAbstract {
 
 	@Override
 	protected LevelView instantiateLevelView() {
-		levelViewTwo = new LevelViewLevelTwo(getRoot(), PLAYER_INITIAL_HEALTH);
-		return levelViewTwo;
+		levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
+		return levelView;
 	}
 
 }
