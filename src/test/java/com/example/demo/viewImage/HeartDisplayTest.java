@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.viewImage;
 import com.example.demo.controller.Main;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

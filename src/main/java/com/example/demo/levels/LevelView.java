@@ -1,8 +1,8 @@
 package com.example.demo.levels;
 
-import com.example.demo.GameOverImage;
-import com.example.demo.HeartDisplay;
-import com.example.demo.WinImage;
+import com.example.demo.viewImage.GameOverImage;
+import com.example.demo.viewImage.HeartDisplay;
+import com.example.demo.viewImage.WinImage;
 
 import javafx.scene.Group;
 
