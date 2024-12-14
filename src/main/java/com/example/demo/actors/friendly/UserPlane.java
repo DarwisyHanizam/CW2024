@@ -31,10 +31,9 @@ public class UserPlane extends FighterPlane {
 		if (isMovingX() && isMovingY()) {
 			updatePositionX();
 			updatePositionY();
-		} else if (isMovingX()) {
-			updatePositionX();
-		} else if (isMovingY()) {
-			updatePositionY();
+		} else {
+			if (isMovingX()) updatePositionX();
+			if (isMovingY()) updatePositionY();
 		}
 	}
 
@@ -70,12 +69,28 @@ public class UserPlane extends FighterPlane {
 		return new UserProjectile(getProjectileXPosition(PROJECTILE_X_POSITION_OFFSET), getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET + yPositionOffset));
 	}
 
-	private boolean isMovingX() {
-		return velocityMultiplierX != 0;
+	public boolean isMovingX() {
+		return isMovingLeft() || isMovingRight();
 	}
 
-	private boolean isMovingY() {
-		return velocityMultiplierY != 0;
+	public boolean isMovingLeft() {
+		return velocityMultiplierX < 0;
+	}
+
+	public boolean isMovingRight() {
+		return velocityMultiplierX > 0;
+	}
+
+	public boolean isMovingY() {
+		return isMovingUp() || isMovingDown();
+	}
+
+	public boolean isMovingUp() {
+		return velocityMultiplierY < 0;
+	}
+
+	public boolean isMovingDown() {
+		return velocityMultiplierY > 0;
 	}
 
 	public void moveUp() {
@@ -105,6 +120,6 @@ public class UserPlane extends FighterPlane {
 
 	public void incrementKillCount() {
 		numberOfKills++;
-	}
+	} 
 
 }

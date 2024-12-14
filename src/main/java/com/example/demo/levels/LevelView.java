@@ -32,7 +32,6 @@ public class LevelView {
 
 	public void showWinImage() {
 		root.getChildren().add(winImage);
-		winImage.showWinImage();
 	}
 
 	public void showGameOverImage() {
@@ -44,6 +43,22 @@ public class LevelView {
 		for (int i = 0; i < currentNumberOfHearts - heartsRemaining; i++) {
 			heartDisplay.removeHeart();
 		}
+	}
+
+	public WinImage getWinImage() {
+		return winImage;
+	}
+
+	public GameOverImage getGameOverImage() {
+		return gameOverImage;
+	}
+
+	public HeartDisplay getHeartDisplay() {
+		return heartDisplay;
+	}
+
+	public Group getRoot() {
+		return root;
 	}
 
 }

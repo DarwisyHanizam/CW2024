@@ -75,7 +75,7 @@ public class LevelAll {
 		friendlyUnits.add(user);
 	}
 
-	protected UserPlane getUser() {
+	public UserPlane getUser() {
 		return user;
 	}
 
@@ -106,5 +106,9 @@ public class LevelAll {
 
 	protected int getDelay(){
 		return MILLISECOND_DELAY;
+	}
+
+	public LevelView getLevelView() {
+		return levelView;
 	}
 }

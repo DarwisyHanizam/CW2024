@@ -9,9 +9,11 @@ import javafx.scene.input.KeyCode;
 public class UserInput {
 	private LevelAll levelAll;
 
-    private boolean movingLeft, movingRight, movingUp, movingDown;
-	private boolean singleShot = true, rapidShot = true, multiShot = true;
-	private long timeLeftPress, timeRightPress, timeUpPress, timeDownPress = 0;
+    private boolean movingLeft = false, movingRight = false;
+    private boolean movingUp = false, movingDown = false;
+	private boolean singleShot = false, rapidShot = false, multiShot = false;
+	private long timeLeftPress = 0, timeRightPress = 0;
+    private long timeUpPress = 0, timeDownPress = 0;
 	private static long DELAY = 100;
 
 	private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
@@ -24,20 +26,20 @@ public class UserInput {
 		levelAll.background.setOnKeyPressed(e -> {
 			switch (e.getCode()) {
 				case KeyCode.LEFT:
-					movingLeft = true;
-					timeLeftPress = System.currentTimeMillis();
+					setMovingLeft(true);
+					setTimePressLeft();
 					break;
 				case KeyCode.RIGHT:
-					movingRight = true;
-					timeRightPress = System.currentTimeMillis();
+					setMovingRight(true);
+					setTimePressRight();
 					break;
 				case KeyCode.UP:
-					movingUp = true;
-					timeUpPress = System.currentTimeMillis();
+					setMovingUp(true);
+					setTimePressUp();
 					break;
 				case KeyCode.DOWN:
-					movingDown = true;
-					timeDownPress = System.currentTimeMillis();
+					setMovingDown(true);
+					setTimePressDown();
 					break;
 				default:
 					break;
@@ -48,29 +50,29 @@ public class UserInput {
 		levelAll.background.setOnKeyReleased(e -> {
 			switch (e.getCode()) {
 				case KeyCode.LEFT:
-					movingLeft = false;
-					timeLeftPress = System.currentTimeMillis() + DELAY;
+					setMovingLeft(false);
+					setTimePressLeft(DELAY);
 					break;
 				case KeyCode.RIGHT:
-					movingRight = false;
-					timeRightPress = System.currentTimeMillis() + DELAY;;
+					setMovingRight(false);
+					setTimePressRight(DELAY);
 					break;
 				case KeyCode.UP:
-					movingUp = false;
-					timeUpPress = System.currentTimeMillis() + DELAY;;
+					setMovingUp(false);
+					setTimePressUp(DELAY);
 					break;
 				case KeyCode.DOWN:
-					movingDown = false;
-					timeDownPress = System.currentTimeMillis() + DELAY;;
+					setMovingDown(false);
+					setTimePressDown(DELAY);
 					break;
 				case KeyCode.Z:
-					multiShot = false;
+					setMultiShot(true);
 					break;
 				case KeyCode.X:
-					rapidShot = false;
+					setRapidShot(true);
 					break;
 				case KeyCode.C:
-					singleShot = false;
+					setSingleShot(true);
 					break;
 				default:
 					break;
@@ -85,45 +87,45 @@ public class UserInput {
     }
 
 	private void keyPressMovement(){
-		if (movingLeft && movingRight) {
-			if (timeLeftPress > timeRightPress) {
+		if (isMovingLeft() && isMovingRight()) {
+			if (getTimePressLeft() > getTimePressRight()) {
 				levelAll.user.moveLeft();
 			} else {
 				levelAll.user.moveRight();
 			}
 		} else {
-			if (movingLeft) levelAll.user.moveLeft();
-			if (movingRight) levelAll.user.moveRight();
+			if (isMovingLeft()) levelAll.user.moveLeft();
+			if (isMovingRight()) levelAll.user.moveRight();
 		}
 
-		if (movingUp && movingDown) {
-			if (timeUpPress > timeDownPress) {
+		if (isMovingUp() && isMovingDown()) {
+			if (getTimePressUp() > getTimePressDown()) {
 				levelAll.user.moveUp();
 			} else {
 				levelAll.user.moveDown();
 			}
 		} else {
-			if (movingUp) levelAll.user.moveUp();
-			if (movingDown) levelAll.user.moveDown();
+			if (isMovingUp()) levelAll.user.moveUp();
+			if (isMovingDown()) levelAll.user.moveDown();
 		}
 
-		if (!movingLeft && !movingRight) {
+		if (!isMovingLeft() && !isMovingRight()) {
 			levelAll.user.stop("Horizontal");
 		}
 
-		if (!movingUp && !movingDown) {
+		if (!isMovingUp() && !isMovingDown()) {
 			levelAll.user.stop("Vertical");
 		}
 	}
 
     private void keyPressShot() {
-        if (!singleShot) {
-			singleShot = true;
+        if (readySingleShot()) {
+			setSingleShot(false);
 			levelAll.levelMechanics.fireProjectile();
 		}
 		
-		if (!rapidShot) {
-			rapidShot = true;
+		if (readyRapidShot()) {
+			setRapidShot(false);
 			for (int i = 0; i < 3; ++i) {
 				scheduler.schedule(() -> {
 					Platform.runLater(() -> {
@@ -133,10 +135,114 @@ public class UserInput {
 			}
 		}
 
-		if (!multiShot) {
-			multiShot = true;
+		if (readyMultiShot()) {
+			setMultiShot(false);
 			levelAll.levelMechanics.fireProjectile(-10);
 			levelAll.levelMechanics.fireProjectile(10);
 		}
+    }
+
+    public boolean isMovingLeft() {
+        return movingLeft;
+    }
+
+    private void setMovingLeft(boolean state) {
+        movingLeft = state;
+    }
+
+	public long getTimePressLeft() {
+		return timeLeftPress;
+	}
+
+	private void setTimePressLeft() {
+		timeLeftPress = System.currentTimeMillis();
+	}
+
+	private void setTimePressLeft(long delay) {
+		timeLeftPress = System.currentTimeMillis() + delay;
+	}
+
+    public boolean isMovingRight() {
+        return movingRight;
+    }
+
+    private void setMovingRight(boolean state) {
+        movingRight = state;
+    }
+
+	public long getTimePressRight() {
+		return timeRightPress;
+	}
+
+	private void setTimePressRight() {
+		timeRightPress = System.currentTimeMillis();
+	}
+
+	private void setTimePressRight(long delay) {
+		timeRightPress = System.currentTimeMillis() + delay;
+	}
+
+    public boolean isMovingUp() {
+        return movingUp;
+    }
+
+    private void setMovingUp(boolean state) {
+        movingUp = state;
+    }
+
+	public long getTimePressUp() {
+		return timeUpPress;
+	}
+
+	private void setTimePressUp() {
+		timeUpPress = System.currentTimeMillis();
+	}
+
+	private void setTimePressUp(long delay) {
+		timeUpPress = System.currentTimeMillis() + delay;
+	}
+
+    public boolean isMovingDown() {
+        return movingDown;
+    }
+
+    private void setMovingDown(boolean state) {
+        movingDown = state;
+    }
+
+	public long getTimePressDown() {
+		return timeDownPress;
+	}
+
+	private void setTimePressDown() {
+		timeDownPress = System.currentTimeMillis();
+	}
+
+	private void setTimePressDown(long delay) {
+		timeDownPress = System.currentTimeMillis() + delay;
+	}
+
+    public boolean readySingleShot() {
+        return singleShot;
+    }
+
+    private void setSingleShot(boolean state) {
+        singleShot = state;
+    }
+
+    public boolean readyRapidShot() {
+        return rapidShot;
+    }
+
+    private void setRapidShot(boolean state) {
+        rapidShot = state;
+    }
+
+    public boolean readyMultiShot() {
+        return multiShot;
+    }
+
+    private void setMultiShot(boolean state) {
+        multiShot = state;
     }
 }

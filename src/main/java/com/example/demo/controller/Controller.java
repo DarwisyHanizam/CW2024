@@ -1,13 +1,10 @@
 package com.example.demo.controller;
+import com.example.demo.levels.handler.LevelAbstract;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-
-import com.example.demo.levels.handler.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -26,26 +23,25 @@ public class Controller implements ActionListener {
 	public void launchGame() throws ClassNotFoundException, NoSuchMethodException, SecurityException,
 			InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException  {
 
-			stage.show();
-			goToLevel(LEVEL_ONE_CLASS_NAME);
+		stage.show();
+		goToLevel(LEVEL_ONE_CLASS_NAME);
 	}
 
 	private void goToLevel(String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException,
 			InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-			
-			if (currentLevel != null) {
-				currentLevel.levelScene.removeAllActors();
-			}
-			
-			Class<?> myClass = Class.forName(className);
-			Constructor<?> constructor = myClass.getConstructor(double.class, double.class);
-			LevelAbstract myLevel = (LevelAbstract) constructor.newInstance(stage.getHeight(), stage.getWidth());
-			myLevel.levelControl.addActionListener(this);
-			Scene scene = myLevel.levelInitializer.initializeScene();
-			stage.setScene(scene);
-			myLevel.levelControl.startGame();
-			currentLevel = myLevel;
+		
+		if (getCurrentLevel() != null) {
+			currentLevel.levelScene.removeAllActors();
+		}
 
+		Class<?> myClass = Class.forName(className);
+		Constructor<?> constructor = myClass.getConstructor(double.class, double.class);
+		LevelAbstract myLevel = (LevelAbstract) constructor.newInstance(stage.getHeight(), stage.getWidth());
+		myLevel.levelControl.addActionListener(this);
+		Scene scene = myLevel.levelInitializer.initializeScene();
+		stage.setScene(scene);
+		myLevel.levelControl.startGame();
+		setCurrentLevel(myLevel);
 	}
 
 	@Override
@@ -59,6 +55,14 @@ public class Controller implements ActionListener {
 			alert.show();
 			e.printStackTrace();;
 		}
+	}
+
+	public LevelAbstract getCurrentLevel(){
+		return currentLevel;
+	}
+
+	private void setCurrentLevel(LevelAbstract level){
+		currentLevel = level;
 	}
 
 }
