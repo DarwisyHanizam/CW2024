@@ -1,8 +1,9 @@
-package com.example.demo.levels;
+package com.example.demo.levels.types;
 
 import com.example.demo.actors.ActiveActorDestructible;
 import com.example.demo.actors.enemy.Boss;
 import com.example.demo.actors.enemy.EnemyPlaneTwo;
+import com.example.demo.levels.LevelView;
 import com.example.demo.levels.handler.LevelAbstract;
 
 public class LevelFour extends LevelAbstract{
