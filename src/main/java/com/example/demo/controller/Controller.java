@@ -1,16 +1,15 @@
 package com.example.demo.controller;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 import com.example.demo.levels.LevelTemplate;
 import com.example.demo.levels.handler.Progression;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Stage;
 
 public class Controller implements ActionListener {
 

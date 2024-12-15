@@ -109,9 +109,12 @@ public class UserPlane extends FighterPlane {
 		velocityMultiplierX = 1;
 	}
 
-	public void stop(String directionAxis) {
-		if (directionAxis == "Vertical") velocityMultiplierY = 0;
-		if (directionAxis == "Horizontal") velocityMultiplierX = 0;
+	public void stopVertical() {
+		velocityMultiplierY = 0;
+	}
+
+	public void stopHorizontal(){
+		velocityMultiplierX = 0;
 	}
 
 	public int getNumberOfKills() {

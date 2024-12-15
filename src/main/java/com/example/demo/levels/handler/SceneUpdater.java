@@ -3,7 +3,6 @@ package com.example.demo.levels.handler;
 import com.example.demo.actors.ActiveActorDestructible;
 import com.example.demo.levels.LevelTemplate;
 import com.example.demo.levels.LevelBuilder;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -3,7 +3,6 @@ package com.example.demo.actors.enemy;
 import com.example.demo.actors.ActiveActorDestructible;
 import com.example.demo.actors.FighterPlane;
 import com.example.demo.levels.handler.LevelDisplay;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,7 +24,6 @@ public class Boss extends FighterPlane{
 	private static final int Y_POSITION_UPPER_BOUND = 0;
 	private static final int Y_POSITION_LOWER_BOUND = 640;
 	private static final int MAX_FRAMES_WITH_SHIELD = 200;
-
 	private final List<Integer> movePattern;
 	private boolean isShielded;
 	private int consecutiveMovesInSameDirection;
@@ -68,11 +66,9 @@ public class Boss extends FighterPlane{
 	
 	@Override
 	public void takeDamage() {
-		System.out.print("HIT! ");
 		if (!isShielded) {
 			super.takeDamage();
-			System.out.println("They don't have a sheild");
-		} else { System.out.println("They have a sheild"); }
+		}
 	}
 
 	private void initializeMovePattern() {
@@ -85,7 +81,6 @@ public class Boss extends FighterPlane{
 	}
 
 	private void updateShield() {
-		System.out.println(framesWithShieldActivated);
 		if (isShielded) framesWithShieldActivated++;
 		else if (shieldShouldBeActivated()) activateShield();	
 		if (shieldExhausted()) deactivateShield();

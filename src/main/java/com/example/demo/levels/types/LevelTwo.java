@@ -7,7 +7,7 @@ import com.example.demo.levels.handler.LevelDisplay;
 public class LevelTwo extends LevelTemplate {
 
 	private static final String BACKGROUND_IMAGE_NAME = "background2.jpg";
-	private static final String NEXT_LEVEL = "com.example.demo.levels.types.LevelThree";
+	private static final String NEXT_LEVEL = "LevelThree";
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 	private final Boss boss;
 	private LevelDisplay levelDisplay;

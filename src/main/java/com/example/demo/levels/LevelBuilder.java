@@ -9,7 +9,6 @@ import com.example.demo.levels.handler.LevelDisplay;
 import com.example.demo.levels.handler.Progression;
 import com.example.demo.levels.handler.ProjectileFactory;
 import com.example.demo.levels.handler.SceneUpdater;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
@@ -29,7 +28,7 @@ public class LevelBuilder {
 	private final Progression progression;
 	private final ProjectileFactory projectileFactory;
 	private final SceneUpdater sceneUpdater;
-	
+
 	private final List<ActionListener> actionListeners;
 	private final List<ActiveActorDestructible> enemyUnits;
 	private final List<ActiveActorDestructible> enemyProjectiles;
@@ -71,7 +70,6 @@ public class LevelBuilder {
 
 		String backgroundFolder = "/com/example/demo/images/backgrounds/";
 		String image = backgroundFolder + backgroundImageName;
-		System.out.println(image);
 		this.background = new ImageView(new Image(getClass().getResource(image).toExternalForm()));
 		background.setOpacity(0.5);
 		this.screenHeight = screenHeight;

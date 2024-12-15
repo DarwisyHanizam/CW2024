@@ -4,7 +4,6 @@ import com.example.demo.viewImage.GameOverImage;
 import com.example.demo.viewImage.HeartDisplay;
 import com.example.demo.viewImage.ShieldImage;
 import com.example.demo.viewImage.WinImage;
-
 import javafx.scene.Group;
 
 public class LevelDisplay {

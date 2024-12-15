@@ -1,7 +1,6 @@
 package com.example.demo.levels.handler;
 
 import com.example.demo.levels.LevelBuilder;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +17,8 @@ public class Progression {
 	}
 
 	public void goToNextLevel(String levelName) {
-		notifyActionListener(levelName);
+		String levelLocation = "com.example.demo.levels.types.";
+		notifyActionListener(levelLocation + levelName);
 	}
 
 	public void winGame() {

@@ -9,11 +9,11 @@ import com.example.demo.levels.handler.LevelDisplay;
 public class LevelThree extends LevelTemplate {
 
 	private static final String BACKGROUND_IMAGE_NAME = "background1.jpg";
-	private static final String NEXT_LEVEL = "com.example.demo.levels.types.LevelFour";
+	private static final String NEXT_LEVEL = "LevelFour";
 	private static final int TOTAL_ENEMIES = 4;
 	private static final int KILLS_TO_ADVANCE = 16;
 	private static final double ENEMY_SPAWN_PROBABILITY = .20;
-    private static final double ENEMY_TWO_SPAWN_PROBABILITY = .60;
+	private static final double ENEMY_TWO_SPAWN_PROBABILITY = .60;
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 
 	public LevelThree(double screenHeight, double screenWidth) {
@@ -41,13 +41,13 @@ public class LevelThree extends LevelTemplate {
 			int currentNumberOfEnemies = getCurrentNumberOfEnemies();
 			for (int i = 0; i < TOTAL_ENEMIES - currentNumberOfEnemies; i++) {
 				if (Math.random() < ENEMY_SPAWN_PROBABILITY) {
-                    double newEnemyInitialYPosition = Math.random() * getEnemyMaximumYPosition();
-                    ActiveActorDestructible newEnemy;
-                    if (Math.random() < ENEMY_TWO_SPAWN_PROBABILITY) {
-                        newEnemy = new EnemyPlaneTwo(getScreenWidth(), newEnemyInitialYPosition);
-                    } else {
-                        newEnemy = new EnemyPlaneOne(getScreenWidth(), newEnemyInitialYPosition);
-                    }
+					double newEnemyInitialYPosition = Math.random() * getEnemyMaximumYPosition();
+					ActiveActorDestructible newEnemy;
+					if (Math.random() < ENEMY_TWO_SPAWN_PROBABILITY) {
+						newEnemy = new EnemyPlaneTwo(getScreenWidth(), newEnemyInitialYPosition);
+					} else {
+						newEnemy = new EnemyPlaneOne(getScreenWidth(), newEnemyInitialYPosition);
+					}
 					addEnemyUnit(newEnemy);
 				}
 			}

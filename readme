@@ -1,61 +1,145 @@
-Todo:
-    Additional:
-    - 2 Dimensional movement [COMPLETED]
-      - Fix level boundary box [COMPLETE]
-      - Fix user bullet position [COMPLETED]
-      - Fix movement to be less static [COMPLETE]
-    - Retry Button after game over
-    - More levels / enemies [COMPLETE]
-    Gameplay Improvement:
-    - Adjust to consistent artstyle
-    - Add sound effects / music
-    Code Improvement:
-    - Consistent image name in code
-    - Add comments
-    - Split java code to more folders (enemy/level/user/etc.)
-    - Test case (game logic) = level requirement, user health, etc.
-    - Group same class implements/extends into a folder
-    - Remove Destructible.java (unnecessary abstract, only 1 class uses) [COMPLETE]
-    Debug:
-    - Enemy + User plane hitboxes [COMPLETE]
-      - Modify the images, make it smaller [COMPLETE]
-    - Update java version [COMPLETE]
-    - Find replacement for observer method [COMPLETE]
-      - Either make a new observer class or use action listener [COMPLETE]
-    - Error of changing levels [COMPLETE]
-    - Sheild functionality works, but image not shown [COMPLETED]
-      - Image is shown, but appears at the back. Lowered background opacity [COMPLETE] 
+# SKY BATTLE
+## 1. OVERVIEW
+GitHub Repository: https://github.com/DarwisyHanizam/CW2024
 
-Changes:
-    Nov 11:
-    - Added transitive to javafx.graphics
-    - Added a readme file
-    Nov 12:
-    - Modified readme to include todo list
-    - Added 2D user movement
-    Nov 13:
-    - Fixed bugs from 2D movement
-    Nov 19:
-    - Update to Java-21
-    Nov 25:
-    - Restructure class files into Actor folder
-    - Replaced Observer type with ActionListener
-    - Fixed bugs from transitioning level
-    Dec 2:
-    - Implemented shield functionality to boss
-     (comment on difficulty of image layering)
-    Dec 8:
-    - Split LevelParent into multiple files based on functionality
-     (comment on difficulty of splitting files while maintaining functionality)
-    Dec 9:
-    - Restructure actor class files and removed Destructible.java
-    Dec 12:
-    - Fixed user + enemy collision boundary
-    - Added new level and enemy type
-    - Modified positioning of images when displayed
-    Dec 13:
-    - Fixed user movement edge case
-     (comment on difficulty during overcomplication)
-    - Added different user projectile types
-    - Added new boss level (LevelFour)
-    - Split LevelInitializer's input functionality to UserInput
+The enemy planes are imminent, ambushing the camp, with endless waves of fighter planes. There's only one man who can raise above the skies and put a stop to their treacherous scheme. In this game "Sky Battle", which is a blend of the Tower Defense and classic Shoot 'em up genre, your mission is to put a stop to their evil plan and defeat the boss before they get the chance to takeover.
+
+### 1.1 Controls
+- Arrow Keys = Move the player
+- Z = Fire a multi-shot
+- X = Fire a rapid-shot
+- C = Fire a single-shot
+- R = Restart (back to 1st level)
+- ESC = Exits the game
+
+### 1.2 Additional Game Features
+- Updated art style (+improved hitboxes)
+- Implemented shields to enemy boss
+- Implemented 2-Dimensional movement
+- Added 2 New firing techniques (single-shot, rapid-shot, multi-shot)
+- Added 2 New levels
+- Added 1 New enemy
+
+### 1.3 File Directory Changes
+- Grouped java classes into 4 categories (actors, controller, levels, viewImage)
+  - Follows the pattern where within the folder is the base files, whereas subfolders stores the implementation/extension of these files
+- Grouped images into 4 categories (backgrounds, display, planes, projectiles)
+- Created 8 JUnit test files
+
+
+## 2. COMPILATION
+Java Version: 21.0.2
+Apache-Maven:  3.9.9
+
+1. Clone the repository
+`git clone https://github.com/DarwisyHanizam/CW2024`
+2. Navigate to the project directory
+`cd CW2024`
+3. Install dependencies
+`mvn install`
+3. Compile the project
+`mvn compile`
+4. Run the project
+`mvn javafx:run`
+
+## 3. IMPLEMENTED & WORKING PROPERLY
+### 3.1 Updated User Movement
+The initial code allowed the player to only move along its vertical axis. To expand and make it more dynamic, the player is able to move in a 2-dimensional space (Up, Down, Left, Right). This extends to being able to press multiple inputs at the same time (e.g. UP + RIGHT) in order to be able to move diagonally. However, after testing the movement, I've found myself to oftentimes hold down on the LEFT and RIGHT arrow key, leading to the player to suddenly stop. Due to this, the movement of the player includes this edge case, where it would move the direction of the most recently pressed arrow key whenever there's a conflict.
+
+Example:
+1. Presses Right -> the player moves right
+2. Presses Up    -> the player moves diagonally up + right
+3. Presses Left  -> the player moves diagonally up + left
+4. Release Right -> the player continues to move up + left
+
+## 3.2 New Projectiles
+Initially there was only one way to fire a projectile and by holding down onto the spacebar, it would lead to multiple shots being fired one after another. To restrict this, the player has to press and release the input keys in order to make a shot. Furthermore, the player is able to press one of either [Z, X, C] buttons in order to fire a different projectile type.
+
+## 3.3 Restart and Exiting Game
+The original game did not provide any method to either restart or exit from the game. This feature was implemented so now by pressing R, the game would restart to the first level. Additionally, pressing the ESCAPE key would exit the game.
+
+
+## 4. IMPLEMENTED & NOT WORKING PROPERLY
+### 4.1 Implementation of Shield
+The boss now shows the shield to indicate it's invincibility state. However, it is placed in middle of the screen and may not be intuitive as to what it represents. I've tried to have the shield follow the movement of the boss, by allowing the shield's y-position to be altered as the boss moves, however wasn't able to implement this, and as such the shield is placed in the middle of the screen.
+
+
+## 5. FEATURES NOT IMPLEMENTED
+### 5.1 Collision Detection using Polygons
+- IMPACT ON GAME :
+This would change the collision detection to be based on polygons modelled to the shape of the enemy and projectiles.
+- IMPLEMENTATION :
+Polygon objects would have to be created with preset verticies/points for each FighterPlane/Projectile image. The initialization of any friendly/enemy units (and their projectiles) would have to create this object, and provide an offset to each verticies so that the collision can align with where the friendly/enemy units are spawned in from
+- REASON OMITTED :
+While this would improve the collision detection to be more precise, avoiding scenarios where the player hasn't collided with anything but takes damage, it wasn't implemented as a similar effect can be achieved using a simpler technique. This is done by ensuring the images used are cropped to the edges of the planes / projectiles. The downside is that it creates a square hitbox for any images and as such would still lead to unprecise collision, which can be seen with the boss's fireball projectile. As the fireball roughly resembles a triangle, there's going to be empty spaces in the square hitbox where the player would take damage, while to the player, in terms of what's shown visually, the two objects did not collide.
+
+### 5.2 Level / Enemy Patterns
+- IMPACT ON GAME :
+This would change the game to be more predictable (i.e. same enemySpawn location, rates of fire) each time the game starts.
+- IMPLEMENTATION :
+Rather than calling the method Math.Random() to set a random Y-Position for the enemy to spawn from, it can randomly choose from a set of Y-Positions. Alternatively, an array can be made with each location the enemy's Y-Position should be, and it goes across the array with each enemy spawn. Using a similar technique/implementation, the boss can have a set pattern of movement, which can lead to more variety rather than having it move only up and down.
+- REASON OMITTED :
+I was unable to implement this feature due to unexpected complexities when refactoring and bug fixing the game into a reliable state, which had led to an overestimation of the time required for each part of the development stage. While this feature would provide quality of life improvements, making the gameplay more enjoyable, it would also lead to restructuring the way a level is created from the LevelTemplate.java (prev. LevelParent) class. 
+
+
+## 6. MODIFIED JAVA CLASSES
+### 6.1 Modified Classes
+Boss.java
+- Its constructor requires a parameter (LevelDisplay) in order to show/hide the shield based on the boss's current state
+ActiveActorDestructible.java
+- Includes the abstract class from Destructible.java
+
+### 6.2 Deleted Classes
+Destructible.java
+- This java class was removed as only one class had implemented it
+LevelViewLevelTwo.java
+- The functionalities were merged into LevelDisplay.java (prev. LevelView)
+
+### 6.3 Renamed Classes
+- EnemyPlane.java -> EnemyPlaneOne.java
+- LevelView.java -> LevelDisplay.java
+- LevelParent.java -> LevelBuilder.java / LevelTemplate.java
+
+
+## 7. NEW JAVA CLASSES
+### 7.1 Splitting LevelBuilder.java (prev. LevelParent)
+There is two reasons as to why this java class was split into multiple classes. The first reason was to separate the class into its concrete and abstract components. This would make the code simpler to maintain while at the same time allow for new levels to simply extend from the abstract class. After doing this, the file was split once more in order to ensure that the code within each file followed the single responsibility principle.
+
+\levels : Abstract Method
+- LevelTemplate.java = contains the abstract methods required in a level
+\levels\handler : Single Responsibility
+- CollisionProcessor.java = processes the collision between different ActiveActor objects
+- Configuration.java = initializes the scene, background, and timeline of the game
+- LevelDisplay.java = handles the display of external elements (i.e. UI)
+- Progression.java = handles the transition between levels
+- ProjectileFactory.java = generates the projectiles fired by the user and enemy
+- SceneUpdater.java = updates the scene to accurately show the current ActiveActors in the level
+- UserInput.java = handles the button inputs from the player to control the plane (inc. restart + exit game)
+
+## 7.2 Creating New Enemies & Level Classes
+\actors\enemy :
+- EnemyPlaneTwo.java = a new enemy type where their goal is to solely get to the end of the screen
+\levels\types :
+- LevelThree.java = introduction to the new enemy type in a setting similar to LevelOne
+- LevelFour.java = incorporates this enemy into a boss battle, dividing the player's attention to attacking the boss and defending against the enemy
+
+## 7.3 Creating JUnit Test Files
+\controller :
+- ControllerTest.java = tests the launch of the game
+- MainTest.java = tests the game is able to start
+\levels\handler :
+- InputHandlerTest.java = tests user inputs (and movement edge cases)
+- LevelControlTest.java = tests the transition of levels and its states
+- LevelDisplayTest.java = tests the display of UI elements
+- LevelInitializerTest.java = tests the initialization of the scene and background
+- LevelSceneTest.java = tests the removal of actors
+\viewImage  :
+- HeartDisplayTest.java = tests the removal of hearts and whether it is displayed
+
+
+## 8. Unexpected Problems
+### 8.1 Modifying the code from Observers to ActionListeners
+I didn't expect how long it would take for me to modify the code to switch from using Observers to ActionListeners. At the beginning, I had assumed that this would be relatively simple. As the observer class was last available/usable in Java-8 and the most recent Java version is Java-21 (the version used to create the game) I expected there to be a lot of readily available resources online that I would be able to refer to when solving this issue. However, I had overestimated the difficulty of the task, along with the unfamiliarity of the code. As a result, I had only been able to make the change in after two weeks of starting. During the time in between, I would be refactoring and implementing features only based on what's available in the first level as transitioning between levels wasn't possible.
+
+### 8.2 Image Layering of the shield
+Another problem I had encountered was getting the shield to display onto the scene. At this point in time, I was also in the process of implementing it's functionality by linking it to the Boss.java class. As I did not have any visual frame of reference to tell whether the code functioned or not, I heavily relied upon printing messages to the terminal, for when the shield is shown/hidden, whether the boss had taken any damage during these states, etc. After a while I realized that the issue wasn't the fact that the shield isn't being added, but it was layered at the very back (behind the background of the level).

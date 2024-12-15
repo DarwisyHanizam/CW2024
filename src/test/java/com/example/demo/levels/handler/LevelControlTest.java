@@ -33,11 +33,12 @@ public class LevelControlTest extends ApplicationTest {
 
 	@Test
 	public void testGoToNextLevel() {
-		String levelName = "com.example.demo.levels.types.LevelTwo";
+		String levelLocation = "com.example.demo.levels.types.";
+		String levelName = "LevelTwo";
 		Platform.runLater(() -> {
 			try {
 				progression.goToNextLevel(levelName);
-				assertEquals(levelName, main.getController().getCurrentLevel().getClass().getName());
+				assertEquals(levelLocation + levelName, main.getController().getCurrentLevel().getClass().getName());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -10,20 +10,19 @@ import javafx.scene.image.ImageView;
 import javafx.application.Platform;
 
 public class UserInput {
+
+	private static final long DELAY = 100;
+	private static boolean movingLeft = false, movingRight = false;
+	private static boolean movingUp = false, movingDown = false;
+	private static boolean singleShot = false, rapidShot = false, multiShot = false;
+	private static long timeLeftPress = 0, timeRightPress = 0;
+	private static long timeUpPress = 0, timeDownPress = 0;
+	private static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 	private LevelBuilder levelBuilder;
 
-    private boolean movingLeft = false, movingRight = false;
-    private boolean movingUp = false, movingDown = false;
-	private boolean singleShot = false, rapidShot = false, multiShot = false;
-	private long timeLeftPress = 0, timeRightPress = 0;
-    private long timeUpPress = 0, timeDownPress = 0;
-	private static long DELAY = 100;
-
-	private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
 	public UserInput(LevelBuilder levelBuilder) {
-        this.levelBuilder = levelBuilder;
-    }
+		this.levelBuilder = levelBuilder;
+	}
 
 	void inputHandler() {
 		ImageView background = levelBuilder.getBackground();
@@ -125,18 +124,18 @@ public class UserInput {
 		}
 
 		if (!isMovingLeft() && !isMovingRight()) {
-			user.stop("Horizontal");
+			user.stopHorizontal();
 		}
 
 		if (!isMovingUp() && !isMovingDown()) {
-			user.stop("Vertical");
+			user.stopVertical();
 		}
 	}
 
-    private void keyPressShot() {
+	private void keyPressShot() {
 		ProjectileFactory projectileFactory = levelBuilder.getProjectileFactory();
 
-        if (readySingleShot()) {
+		if (readySingleShot()) {
 			setSingleShot(false);
 			projectileFactory.fireProjectile();
 		}
@@ -157,15 +156,15 @@ public class UserInput {
 			projectileFactory.fireProjectile(-10);
 			projectileFactory.fireProjectile(10);
 		}
-    }
+	}
 
-    public boolean isMovingLeft() {
-        return movingLeft;
-    }
+	public boolean isMovingLeft() {
+		return movingLeft;
+	}
 
-    private void setMovingLeft(boolean state) {
-        movingLeft = state;
-    }
+	private void setMovingLeft(boolean state) {
+		movingLeft = state;
+	}
 
 	public long getTimePressLeft() {
 		return timeLeftPress;
@@ -179,13 +178,13 @@ public class UserInput {
 		timeLeftPress = System.currentTimeMillis() + delay;
 	}
 
-    public boolean isMovingRight() {
-        return movingRight;
-    }
+	public boolean isMovingRight() {
+		return movingRight;
+	}
 
-    private void setMovingRight(boolean state) {
-        movingRight = state;
-    }
+	private void setMovingRight(boolean state) {
+		movingRight = state;
+	}
 
 	public long getTimePressRight() {
 		return timeRightPress;
@@ -199,13 +198,13 @@ public class UserInput {
 		timeRightPress = System.currentTimeMillis() + delay;
 	}
 
-    public boolean isMovingUp() {
-        return movingUp;
-    }
+	public boolean isMovingUp() {
+		return movingUp;
+	}
 
-    private void setMovingUp(boolean state) {
-        movingUp = state;
-    }
+	private void setMovingUp(boolean state) {
+		movingUp = state;
+	}
 
 	public long getTimePressUp() {
 		return timeUpPress;
@@ -219,13 +218,13 @@ public class UserInput {
 		timeUpPress = System.currentTimeMillis() + delay;
 	}
 
-    public boolean isMovingDown() {
-        return movingDown;
-    }
+	public boolean isMovingDown() {
+		return movingDown;
+	}
 
-    private void setMovingDown(boolean state) {
-        movingDown = state;
-    }
+	private void setMovingDown(boolean state) {
+		movingDown = state;
+	}
 
 	public long getTimePressDown() {
 		return timeDownPress;
@@ -239,27 +238,28 @@ public class UserInput {
 		timeDownPress = System.currentTimeMillis() + delay;
 	}
 
-    public boolean readySingleShot() {
-        return singleShot;
-    }
+	public boolean readySingleShot() {
+		return singleShot;
+	}
 
-    private void setSingleShot(boolean state) {
-        singleShot = state;
-    }
+	private void setSingleShot(boolean state) {
+		singleShot = state;
+	}
 
-    public boolean readyRapidShot() {
-        return rapidShot;
-    }
+	public boolean readyRapidShot() {
+		return rapidShot;
+	}
 
-    private void setRapidShot(boolean state) {
-        rapidShot = state;
-    }
+	private void setRapidShot(boolean state) {
+		rapidShot = state;
+	}
 
-    public boolean readyMultiShot() {
-        return multiShot;
-    }
+	public boolean readyMultiShot() {
+		return multiShot;
+	}
 
-    private void setMultiShot(boolean state) {
-        multiShot = state;
-    }
+	private void setMultiShot(boolean state) {
+		multiShot = state;
+	}
+
 }

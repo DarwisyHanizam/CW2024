@@ -20,7 +20,7 @@ public class LevelFour extends LevelTemplate{
 		boss = new Boss(levelDisplay);
 	}
 	
-    @Override
+	@Override
 	public void initializeFriendlyUnits() {
 		getRoot().getChildren().add(getUser());
 	}
@@ -54,4 +54,5 @@ public class LevelFour extends LevelTemplate{
 		levelDisplay = new LevelDisplay(getRoot(), PLAYER_INITIAL_HEALTH);
 		return levelDisplay;
 	}
+
 }
