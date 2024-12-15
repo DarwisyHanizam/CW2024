@@ -6,6 +6,9 @@ import com.example.demo.actors.enemy.EnemyPlaneTwo;
 import com.example.demo.levels.LevelTemplate;
 import com.example.demo.levels.handler.LevelDisplay;
 
+/**
+ * Represents the third level of the game.
+ */
 public class LevelThree extends LevelTemplate {
 
 	private static final String BACKGROUND_IMAGE_NAME = "background1.jpg";
@@ -16,10 +19,19 @@ public class LevelThree extends LevelTemplate {
 	private static final double ENEMY_TWO_SPAWN_PROBABILITY = .60;
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 
+	/**
+	 * Constructs a new LevelThree instance.
+	 *
+	 * @param screenHeight the height of the screen
+	 * @param screenWidth the width of the screen
+	 */
 	public LevelThree(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
 	}
 
+	/**
+	 * Checks if the game is over.
+	 */
 	@Override
 	public void checkIfGameOver() {
 		if (userIsDestroyed()) {
@@ -30,11 +42,17 @@ public class LevelThree extends LevelTemplate {
 		}
 	}
 
+	/**
+	 * Initializes the friendly units in the level.
+	 */
 	@Override
 	public void initializeFriendlyUnits() {
 		getRoot().getChildren().add(getUser());
 	}
 
+	/**
+	 * Spawns enemy units in the level.
+	 */
 	@Override
 	public void spawnEnemyUnits() {
 		if (!userHasReachedKillTarget()){
@@ -54,11 +72,21 @@ public class LevelThree extends LevelTemplate {
 		}
 	}
 
+	/**
+	 * Instantiates the level display.
+	 *
+	 * @return the level display
+	 */
 	@Override
 	public LevelDisplay instantiateLevelDisplay() {
 		return new LevelDisplay(getRoot(), PLAYER_INITIAL_HEALTH);
 	}
 
+	/**
+	 * Checks if the user has reached the kill target.
+	 *
+	 * @return true if the user has reached the kill target, false otherwise
+	 */
 	private boolean userHasReachedKillTarget() {
 		return getUser().getNumberOfKills() >= KILLS_TO_ADVANCE;
 	}

@@ -6,6 +6,9 @@ import com.example.demo.actors.enemy.EnemyPlaneTwo;
 import com.example.demo.levels.LevelTemplate;
 import com.example.demo.levels.handler.LevelDisplay;
 
+/**
+ * Represents the fourth level of the game.
+ */
 public class LevelFour extends LevelTemplate{
 
 	private static final String BACKGROUND_IMAGE_NAME = "background2.jpg";
@@ -15,16 +18,28 @@ public class LevelFour extends LevelTemplate{
 	private final Boss boss;
 	private LevelDisplay levelDisplay;
 
+	/**
+	 * Constructs a new LevelFour instance.
+	 *
+	 * @param screenHeight the height of the screen
+	 * @param screenWidth the width of the screen
+	 */
 	public LevelFour(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
 		boss = new Boss(levelDisplay);
 	}
 	
+	/**
+	 * Initializes the friendly units in the level.
+	 */
 	@Override
 	public void initializeFriendlyUnits() {
 		getRoot().getChildren().add(getUser());
 	}
 
+	/**
+	 * Checks if the game is over.
+	 */
 	@Override
 	public void checkIfGameOver() {
 		if (userIsDestroyed()) {
@@ -35,6 +50,9 @@ public class LevelFour extends LevelTemplate{
 		}
 	}
 
+	/**
+	 * Spawns enemy units in the level.
+	 */
 	@Override
 	public void spawnEnemyUnits() {
 		if (getCurrentNumberOfEnemies() == 0) {
@@ -49,6 +67,11 @@ public class LevelFour extends LevelTemplate{
 		}
 	}
 
+	/**
+	 * Instantiates the level display.
+	 *
+	 * @return the level display
+	 */
 	@Override
 	public LevelDisplay instantiateLevelDisplay() {
 		levelDisplay = new LevelDisplay(getRoot(), PLAYER_INITIAL_HEALTH);
