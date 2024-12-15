@@ -69,7 +69,10 @@ public class LevelBuilder {
 		this.enemyUnits = new ArrayList<>();
 		this.enemyProjectiles = new ArrayList<>();
 
-		this.background = new ImageView(new Image(getClass().getResource(backgroundImageName).toExternalForm()));
+		String backgroundFolder = "/com/example/demo/images/backgrounds/";
+		String image = backgroundFolder + backgroundImageName;
+		System.out.println(image);
+		this.background = new ImageView(new Image(getClass().getResource(image).toExternalForm()));
 		background.setOpacity(0.5);
 		this.screenHeight = screenHeight;
 		this.screenWidth = screenWidth;

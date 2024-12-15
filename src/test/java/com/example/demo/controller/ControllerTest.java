@@ -21,7 +21,7 @@ public class ControllerTest extends ApplicationTest {
 
 	@Test
 	public void testLaunchGame() throws Exception {
- 		String levelName = "com.example.demo.levels.LevelOne";
+ 		String levelName = "com.example.demo.levels.types.LevelOne";
 		assertTrue(main.getStage().isShowing());
 		assertNotNull(controller.getCurrentLevel());
 		assertEquals(levelName, controller.getCurrentLevel().getClass().getName());
