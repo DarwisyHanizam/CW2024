@@ -3,40 +3,40 @@ package com.example.demo.levels.types;
 import com.example.demo.actors.ActiveActorDestructible;
 import com.example.demo.actors.enemy.Boss;
 import com.example.demo.actors.enemy.EnemyPlaneTwo;
-import com.example.demo.levels.LevelView;
-import com.example.demo.levels.handler.LevelAbstract;
+import com.example.demo.levels.LevelTemplate;
+import com.example.demo.levels.handler.LevelDisplay;
 
-public class LevelFour extends LevelAbstract{
+public class LevelFour extends LevelTemplate{
 
 	private static final String BACKGROUND_IMAGE_NAME = "/com/example/demo/images/background2.jpg";
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 	private static final double ENEMY_SPAWN_PROBABILITY = .05;
 	private static final int TOTAL_ENEMIES = 3;
 	private final Boss boss;
-	private LevelView levelView;
+	private LevelDisplay levelDisplay;
 
 	public LevelFour(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
-		boss = new Boss(levelView);
+		boss = new Boss(levelDisplay);
 	}
 	
     @Override
-	protected void initializeFriendlyUnits() {
+	public void initializeFriendlyUnits() {
 		getRoot().getChildren().add(getUser());
 	}
 
 	@Override
-	protected void checkIfGameOver() {
+	public void checkIfGameOver() {
 		if (userIsDestroyed()) {
-			levelControl.loseGame();
+			getProgression().loseGame();
 		}
 		else if (boss.isDestroyed() && getCurrentNumberOfEnemies() == 0) {
-			levelControl.winGame();
+			getProgression().winGame();
 		}
 	}
 
 	@Override
-	protected void spawnEnemyUnits() {
+	public void spawnEnemyUnits() {
 		if (getCurrentNumberOfEnemies() == 0) {
 			addEnemyUnit(boss);
 		}
@@ -50,8 +50,8 @@ public class LevelFour extends LevelAbstract{
 	}
 
 	@Override
-	protected LevelView instantiateLevelView() {
-		levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
-		return levelView;
+	public LevelDisplay instantiateLevelDisplay() {
+		levelDisplay = new LevelDisplay(getRoot(), PLAYER_INITIAL_HEALTH);
+		return levelDisplay;
 	}
 }

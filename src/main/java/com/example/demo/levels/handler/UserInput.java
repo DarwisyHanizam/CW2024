@@ -1,13 +1,16 @@
 package com.example.demo.levels.handler;
 
+import com.example.demo.actors.friendly.UserPlane;
+import com.example.demo.levels.LevelBuilder;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
+import javafx.scene.image.ImageView;
+import javafx.application.Platform;
 
 public class UserInput {
-	private LevelAll levelAll;
+	private LevelBuilder levelBuilder;
 
     private boolean movingLeft = false, movingRight = false;
     private boolean movingUp = false, movingDown = false;
@@ -18,12 +21,14 @@ public class UserInput {
 
 	private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-	public UserInput(LevelAll levelAll) {
-        this.levelAll = levelAll;
+	public UserInput(LevelBuilder levelBuilder) {
+        this.levelBuilder = levelBuilder;
     }
 
-	public void inputHandler() {
-		levelAll.background.setOnKeyPressed(e -> {
+	void inputHandler() {
+		ImageView background = levelBuilder.getBackground();
+
+		background.setOnKeyPressed(e -> {
 			switch (e.getCode()) {
 				case KeyCode.LEFT:
 					setMovingLeft(true);
@@ -47,7 +52,7 @@ public class UserInput {
 			handleKeyPress();
 		});
 
-		levelAll.background.setOnKeyReleased(e -> {
+		background.setOnKeyReleased(e -> {
 			switch (e.getCode()) {
 				case KeyCode.LEFT:
 					setMovingLeft(false);
@@ -87,41 +92,45 @@ public class UserInput {
     }
 
 	private void keyPressMovement(){
+		UserPlane user = levelBuilder.getUser();
+
 		if (isMovingLeft() && isMovingRight()) {
 			if (getTimePressLeft() > getTimePressRight()) {
-				levelAll.user.moveLeft();
+				user.moveLeft();
 			} else {
-				levelAll.user.moveRight();
+				user.moveRight();
 			}
 		} else {
-			if (isMovingLeft()) levelAll.user.moveLeft();
-			if (isMovingRight()) levelAll.user.moveRight();
+			if (isMovingLeft()) user.moveLeft();
+			if (isMovingRight()) user.moveRight();
 		}
 
 		if (isMovingUp() && isMovingDown()) {
 			if (getTimePressUp() > getTimePressDown()) {
-				levelAll.user.moveUp();
+				user.moveUp();
 			} else {
-				levelAll.user.moveDown();
+				user.moveDown();
 			}
 		} else {
-			if (isMovingUp()) levelAll.user.moveUp();
-			if (isMovingDown()) levelAll.user.moveDown();
+			if (isMovingUp()) user.moveUp();
+			if (isMovingDown()) user.moveDown();
 		}
 
 		if (!isMovingLeft() && !isMovingRight()) {
-			levelAll.user.stop("Horizontal");
+			user.stop("Horizontal");
 		}
 
 		if (!isMovingUp() && !isMovingDown()) {
-			levelAll.user.stop("Vertical");
+			user.stop("Vertical");
 		}
 	}
 
     private void keyPressShot() {
+		ProjectileFactory projectileFactory = levelBuilder.getProjectileFactory();
+
         if (readySingleShot()) {
 			setSingleShot(false);
-			levelAll.levelMechanics.fireProjectile();
+			projectileFactory.fireProjectile();
 		}
 		
 		if (readyRapidShot()) {
@@ -129,7 +138,7 @@ public class UserInput {
 			for (int i = 0; i < 3; ++i) {
 				scheduler.schedule(() -> {
 					Platform.runLater(() -> {
-						levelAll.levelMechanics.fireProjectile();
+						projectileFactory.fireProjectile();
 					});
 				}, i * 100, TimeUnit.MILLISECONDS);
 			}
@@ -137,8 +146,8 @@ public class UserInput {
 
 		if (readyMultiShot()) {
 			setMultiShot(false);
-			levelAll.levelMechanics.fireProjectile(-10);
-			levelAll.levelMechanics.fireProjectile(10);
+			projectileFactory.fireProjectile(-10);
+			projectileFactory.fireProjectile(10);
 		}
     }
 

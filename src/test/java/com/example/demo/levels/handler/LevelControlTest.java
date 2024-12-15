@@ -1,5 +1,7 @@
 package com.example.demo.levels.handler;
+
 import com.example.demo.controller.Main;
+import com.example.demo.levels.LevelBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,29 +14,29 @@ import javafx.application.Platform;
 
 public class LevelControlTest extends ApplicationTest {
 
-	private LevelControl levelControl;
-	private LevelAll levelAll;
+	private Progression progression;
+	private LevelBuilder levelBuilder;
 	private Main main = new Main();
 
 	@Override
 	public void start(Stage stage) throws Exception {
 		main.start(stage);
-		levelAll = main.getController().getCurrentLevel();
-		levelControl = levelAll.levelControl;
+		levelBuilder = main.getController().getCurrentLevel();
+		progression = levelBuilder.getProgression();
 	}
 
 	@Test
 	public void testStartGame() {
-		assertTrue(levelAll.background.isFocused());
-		assertTrue(levelAll.timeline.getStatus() == Animation.Status.RUNNING);
+		assertTrue(levelBuilder.getBackground().isFocused());
+		assertTrue(levelBuilder.getTimeline().getStatus() == Animation.Status.RUNNING);
 	}
 
 	@Test
 	public void testGoToNextLevel() {
-		String levelName = "com.example.demo.levels.LevelTwo";
+		String levelName = "com.example.demo.levels.types.LevelTwo";
 		Platform.runLater(() -> {
 			try {
-				levelControl.goToNextLevel(levelName);
+				progression.goToNextLevel(levelName);
 				assertEquals(levelName, main.getController().getCurrentLevel().getClass().getName());
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -46,9 +48,9 @@ public class LevelControlTest extends ApplicationTest {
 	public void testWinGame() {
 		Platform.runLater(() -> {
 			try {
-				levelControl.winGame();
-				assertTrue(levelAll.timeline.getStatus() == Animation.Status.STOPPED);
-				assertTrue(levelAll.levelView.getWinImage().isVisible());
+				progression.winGame();
+				assertTrue(levelBuilder.getTimeline().getStatus() == Animation.Status.STOPPED);
+				assertTrue(levelBuilder.getLevelDisplay().getWinImage().isVisible());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -59,9 +61,9 @@ public class LevelControlTest extends ApplicationTest {
 	public void testLoseGame() {
 		Platform.runLater(() -> {
 			try {
-				levelControl.loseGame();
-				assertTrue(levelAll.timeline.getStatus() == Animation.Status.STOPPED);
-				assertTrue(levelAll.levelView.getGameOverImage().isVisible());
+				progression.loseGame();
+				assertTrue(levelBuilder.getTimeline().getStatus() == Animation.Status.STOPPED);
+				assertTrue(levelBuilder.getLevelDisplay().getGameOverImage().isVisible());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -70,9 +72,9 @@ public class LevelControlTest extends ApplicationTest {
 
 	@Test
 	public void testAddActionListener() {
-		int initialSize = levelAll.actionListeners.size();
-		levelControl.addActionListener(main.getController());
-		assertEquals(initialSize + 1, levelAll.actionListeners.size());
+		int initialSize = levelBuilder.getActionListeners().size();
+		progression.addActionListener(main.getController());
+		assertEquals(initialSize + 1, levelBuilder.getActionListeners().size());
 	}
 
 }

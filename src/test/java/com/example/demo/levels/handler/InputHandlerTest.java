@@ -1,20 +1,22 @@
 package com.example.demo.levels.handler;
+
 import com.example.demo.actors.friendly.UserPlane;
 import com.example.demo.controller.Main;
+import com.example.demo.levels.LevelBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import org.testfx.framework.junit5.ApplicationTest;
 import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
 
 import javafx.application.Platform;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.KeyCode;
-import javafx.scene.image.ImageView;
 import javafx.event.EventType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-public class UserInputTest extends ApplicationTest {
+public class InputHandlerTest extends ApplicationTest {
 
 	private KeyEvent leftPress, rightPress, upPress, downPress;
 	private KeyEvent leftRelease, rightRelease, upRelease, downRelease;
@@ -22,17 +24,17 @@ public class UserInputTest extends ApplicationTest {
 
 	private ImageView background;
 	private UserInput userInput;
-	private LevelAll levelAll;
+	private LevelBuilder levelBuilder;
 	private UserPlane user;
 	private Main main = new Main();
 
 	@Override
 	public void start(Stage stage) throws Exception {
 		main.start(stage);
-		levelAll = main.getController().getCurrentLevel();
-		background = levelAll.background;
-		userInput = levelAll.userInput;
-		user = levelAll.user;
+		levelBuilder = main.getController().getCurrentLevel();
+		background = levelBuilder.getBackground();
+		userInput = levelBuilder.getUserInput();
+		user = levelBuilder.getUser();
 		simultateKeyPress();
 	}
 

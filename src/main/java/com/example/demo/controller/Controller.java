@@ -1,8 +1,10 @@
 package com.example.demo.controller;
-import com.example.demo.levels.handler.LevelAbstract;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+
+import com.example.demo.levels.LevelTemplate;
+import com.example.demo.levels.handler.Progression;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javafx.scene.Scene;
@@ -12,8 +14,8 @@ import javafx.stage.Stage;
 
 public class Controller implements ActionListener {
 
-	private static final String LEVEL_ONE_CLASS_NAME = "com.example.demo.levels.LevelOne";
-	private LevelAbstract currentLevel;
+	private static final String LEVEL_ONE_CLASS_NAME = "com.example.demo.levels.types.LevelOne";
+	private LevelTemplate currentLevel;
 	private final Stage stage;
 
 	public Controller(Stage stage) {
@@ -31,16 +33,17 @@ public class Controller implements ActionListener {
 			InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		
 		if (getCurrentLevel() != null) {
-			currentLevel.levelScene.removeAllActors();
+			currentLevel.getSceneUpdater().removeAllActors();
 		}
 
 		Class<?> myClass = Class.forName(className);
 		Constructor<?> constructor = myClass.getConstructor(double.class, double.class);
-		LevelAbstract myLevel = (LevelAbstract) constructor.newInstance(stage.getHeight(), stage.getWidth());
-		myLevel.levelControl.addActionListener(this);
-		Scene scene = myLevel.levelInitializer.initializeScene();
+		LevelTemplate myLevel = (LevelTemplate) constructor.newInstance(stage.getHeight(), stage.getWidth());
+		Progression progress = myLevel.getProgression();
+		progress.addActionListener(this);
+		Scene scene = myLevel.getConfiguration().initializeScene();
 		stage.setScene(scene);
-		myLevel.levelControl.startGame();
+		progress.startGame();
 		setCurrentLevel(myLevel);
 	}
 
@@ -57,11 +60,11 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	public LevelAbstract getCurrentLevel(){
+	public LevelTemplate getCurrentLevel(){
 		return currentLevel;
 	}
 
-	private void setCurrentLevel(LevelAbstract level){
+	private void setCurrentLevel(LevelTemplate level){
 		currentLevel = level;
 	}
 

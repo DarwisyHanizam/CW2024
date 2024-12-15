@@ -1,4 +1,4 @@
-package com.example.demo.levels;
+package com.example.demo.levels.handler;
 
 import com.example.demo.viewImage.GameOverImage;
 import com.example.demo.viewImage.HeartDisplay;
@@ -7,8 +7,7 @@ import com.example.demo.viewImage.WinImage;
 
 import javafx.scene.Group;
 
-public class LevelView {
-
+public class LevelDisplay {
 	private static final double HEART_DISPLAY_X_POSITION = 5;
 	private static final double HEART_DISPLAY_Y_POSITION = 25;
 	private static final int WIN_IMAGE_X_POSITION = 355;
@@ -23,7 +22,7 @@ public class LevelView {
 	private final GameOverImage gameOverImage;
 	private final ShieldImage shieldImage;
 
-	public LevelView(Group root, int heartsToDisplay) {
+	public LevelDisplay(Group root, int heartsToDisplay) {
 		this.root = root;
 		heartDisplay = new HeartDisplay(HEART_DISPLAY_X_POSITION, HEART_DISPLAY_Y_POSITION, heartsToDisplay);
 		winImage = new WinImage(WIN_IMAGE_X_POSITION, WIN_IMAGE_Y_POSITION);
@@ -31,15 +30,15 @@ public class LevelView {
 		shieldImage = new ShieldImage(SHIELD_IMAGE_X_POSITION, SHIELD_IMAGE_Y_POSITION);
 	}
 
-	public void showHeartDisplay() {
+	void showHeartDisplay() {
 		root.getChildren().add(heartDisplay.getContainer());
 	}
 
-	public void showWinImage() {
+	void showWinImage() {
 		root.getChildren().add(winImage);
 	}
 
-	public void showGameOverImage() {
+	void showGameOverImage() {
 		root.getChildren().add(gameOverImage);
 	}
 
@@ -48,7 +47,7 @@ public class LevelView {
 		shieldImage.showShield();
 	}
 
-	public void removeHearts(int heartsRemaining) {
+	void removeHearts(int heartsRemaining) {
 		int currentNumberOfHearts = heartDisplay.getContainer().getChildren().size();
 		for (int i = 0; i < currentNumberOfHearts - heartsRemaining; i++) {
 			heartDisplay.removeHeart();
@@ -74,5 +73,4 @@ public class LevelView {
 	public ShieldImage getShieldImage() {
 		return shieldImage;
 	}
-
 }

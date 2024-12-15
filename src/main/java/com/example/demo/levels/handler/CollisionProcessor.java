@@ -1,17 +1,14 @@
 package com.example.demo.levels.handler;
 
 import com.example.demo.actors.ActiveActorDestructible;
+import com.example.demo.levels.LevelBuilder;
 import java.util.List;
 
-public class LevelCollision {
-	private LevelAll levelAll;
+public class CollisionProcessor {
+	private LevelBuilder levelBuilder;
 
-	public LevelCollision(LevelAll levelAll){
-		this.levelAll = levelAll;
-	}
-
-	private boolean enemyHasPenetratedDefenses(ActiveActorDestructible enemy) {
-		return Math.abs(enemy.getTranslateX()) > levelAll.screenWidth;
+	public CollisionProcessor(LevelBuilder levelBuilder){
+		this.levelBuilder = levelBuilder;
 	}
 
 	private void handleCollisions(List<ActiveActorDestructible> actors1, 
@@ -26,22 +23,26 @@ public class LevelCollision {
 		}
 	}
 
+	private boolean enemyHasPenetratedDefenses(ActiveActorDestructible enemy) {
+		return Math.abs(enemy.getTranslateX()) > levelBuilder.getScreenWidth();
+	}
+
 	void handlePlaneCollisions() {
-		handleCollisions(levelAll.friendlyUnits, levelAll.enemyUnits);
+		handleCollisions(levelBuilder.getFriendlyUnits(), levelBuilder.getEnemyUnits());
 	}
 
 	void handleUserProjectileCollisions() {
-		handleCollisions(levelAll.userProjectiles, levelAll.enemyUnits);
+		handleCollisions(levelBuilder.getUserProjectiles(), levelBuilder.getEnemyUnits());
 	}
 
 	void handleEnemyProjectileCollisions() {
-		handleCollisions(levelAll.enemyProjectiles, levelAll.friendlyUnits);
+		handleCollisions(levelBuilder.getEnemyProjectiles(), levelBuilder.getFriendlyUnits());
 	}
 
 	void handleEnemyPenetration() {
-		for (ActiveActorDestructible enemy : levelAll.enemyUnits) {
+		for (ActiveActorDestructible enemy : levelBuilder.getEnemyUnits()) {
 			if (enemyHasPenetratedDefenses(enemy)) {
-				levelAll.user.takeDamage();
+				levelBuilder.getUser().takeDamage();
 				enemy.destroy();
 			}
 		}

@@ -1,36 +1,37 @@
-package com.example.demo.levels;
+package com.example.demo.levels.handler;
+
 import com.example.demo.controller.Main;
-import com.example.demo.levels.handler.LevelAll;
+import com.example.demo.levels.LevelBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.testfx.framework.junit5.ApplicationTest;
 import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
 
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.stage.Stage;
 
-public class LevelViewTest extends ApplicationTest {
+public class LevelDisplayTest extends ApplicationTest {
 
-	private LevelView levelView;
-	private LevelAll levelAll;
+	private LevelDisplay LevelDisplay;
+	private LevelBuilder levelBuilder;
 	private Group root;
 	private Main main = new Main();
 
 	@Override
 	public void start(Stage stage) throws Exception {
 		main.start(stage);
-		levelAll = main.getController().getCurrentLevel();
-		levelView = levelAll.getLevelView();
-		root = levelView.getRoot();
+		levelBuilder = main.getController().getCurrentLevel();
+		LevelDisplay = levelBuilder.getLevelDisplay();
+		root = LevelDisplay.getRoot();
 	}
 
 	@Test
 	public void testShowHeartDisplay() {
 		Platform.runLater(() -> {
 			try {
-				levelView.showHeartDisplay();
-				assertTrue(root.getChildren().contains(levelView.getHeartDisplay().getContainer()));
+				LevelDisplay.showHeartDisplay();
+				assertTrue(root.getChildren().contains(LevelDisplay.getHeartDisplay().getContainer()));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -41,8 +42,8 @@ public class LevelViewTest extends ApplicationTest {
 	public void testShowWinImage() {
 		Platform.runLater(() -> {
 			try {
-				levelView.showWinImage();
-				assertTrue(root.getChildren().contains(levelView.getWinImage()));
+				LevelDisplay.showWinImage();
+				assertTrue(root.getChildren().contains(LevelDisplay.getWinImage()));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -53,8 +54,8 @@ public class LevelViewTest extends ApplicationTest {
 	public void testShowGameOverImage() {
 		Platform.runLater(() -> {
 			try {
-				levelView.showGameOverImage();
-				assertTrue(root.getChildren().contains(levelView.getGameOverImage()));
+				LevelDisplay.showGameOverImage();
+				assertTrue(root.getChildren().contains(LevelDisplay.getGameOverImage()));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
