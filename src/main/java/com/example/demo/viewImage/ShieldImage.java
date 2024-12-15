@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 
 public class ShieldImage extends ImageView {
 
-	private static final String IMAGE_NAME = "/com/example/demo/images/shield.png";
+	private static final String IMAGE_NAME = "/com/example/demo/images/display/shield.png";
 	private static final int WIDTH = 600;
 	private static final int HEIGHT = 500;
 
