@@ -46,6 +46,14 @@ public class UserInput {
 					setMovingDown(true);
 					setTimePressDown();
 					break;
+				case KeyCode.R:
+					Progression progression;
+					progression = levelBuilder.getProgression();
+					progression.goToNextLevel("com.example.demo.levels.types.LevelOne");
+					break;
+				case KeyCode.ESCAPE:
+					Platform.exit();
+					break;
 				default:
 					break;
 			}
