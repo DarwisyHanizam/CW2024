@@ -2,8 +2,10 @@ package com.example.demo.actors;
 
 public abstract class Projectile extends ActiveActorDestructible {
 
+	private static final String projectileFolder = "/com/example/demo/images/projectiles/";
+
 	public Projectile(String imageName, int imageHeight, double initialXPos, double initialYPos) {
-		super(imageName, imageHeight, initialXPos, initialYPos);
+		super(projectileFolder + imageName, imageHeight, initialXPos, initialYPos);
 	}
 
 	@Override

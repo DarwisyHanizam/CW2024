@@ -20,7 +20,7 @@ public abstract class ActiveActorDestructible extends ActiveActor {
 		setDestroyed(true);
 	}
 
-	protected void setDestroyed(boolean isDestroyed) {
+	private void setDestroyed(boolean isDestroyed) {
 		this.isDestroyed = isDestroyed;
 	}
 

@@ -3,9 +3,10 @@ package com.example.demo.actors;
 public abstract class FighterPlane extends ActiveActorDestructible {
 
 	private int health;
+	private static final String planeFolder = "/com/example/demo/images/planes/";
 
 	public FighterPlane(String imageName, int imageHeight, double initialXPos, double initialYPos, int health) {
-		super(imageName, imageHeight, initialXPos, initialYPos);
+		super(planeFolder + imageName, imageHeight, initialXPos, initialYPos);
 		this.health = health;
 	}
 
